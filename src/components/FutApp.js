@@ -40,12 +40,11 @@ class FutApp extends Component {
           </blockquote>
         </div>
         <div className="body">
-          <LayerStack />
           <CharPicker />
           <ColorPicker />
           <CharPalette />
         </div>
-        <div className="foot">
+      <div className="foot">
         </div>
       </section>
     )

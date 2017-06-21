@@ -1,5 +1,6 @@
 
 /* global fut */
+import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import StaticContainer from "react-static-container";
 
@@ -7,15 +8,24 @@ import "./ColorPicker.css";
 
 class ColorPicker extends Component {
   displayName: "ColorPicker";
-  constructor(props) {
-    super(props);
-    console.warn("ColorPicker");
+
+  static propTypes = {
+    onPickColor: PropTypes.func
   }
+
+  static defaultProps = {
+    onPickColor: (color) => {
+      console.warn('onPickColor', color);
+    }
+  }
+
   componentDidMount() {
-    fut.colorPicker(this.el, (change) => {
-      console.warn(change);
+    const { onPickColor } = this.props;
+    fut.colorPicker(this.el, (newColor) => {
+      onPickColor(newColor);
     });
   }
+
   render() {
     return (
       <StaticContainer>

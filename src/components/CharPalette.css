@@ -1,6 +1,16 @@
 .char-palette {
-  height: auto;
-  min-height: 30px;
-  min-width: 30px;
-  background-color: blue;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  min-height: 15pt;
+  min-width: 15pt;
+  margin: 0 auto;
+}
+
+.char-palette button {
+  background-color: white;
+  border: 1px solid blue;
+  font-size: 12pt;
+  font: Courier\ New;
+  text-align: center;
 }
