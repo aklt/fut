@@ -1,0 +1,6 @@
+.char-palette {
+  height: auto;
+  min-height: 30px;
+  min-width: 30px;
+  background-color: blue;
+}
