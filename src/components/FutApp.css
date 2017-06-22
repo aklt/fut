@@ -1,40 +1,5 @@
-a {
-  color: #44e;
-  text-decoration: none;
-}
-
-a:visited {
-  color: #44e;
-}
-
-a:active {
-  color: red;
-}
-
-blockquote {
-  color: #888;
-  text-shadow: 3px;
-  text-align: center;
-}
-
-h1 {
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  font-size: 16t;
-}
 
 div.body {
-}
-
-div.selection span {
-  padding-left: 1em;
-}
-
-div.tabs span {
-  padding-left: 1em;
-}
-
-div.results textarea {
-  float: left;
+  display: flex;
+  flex-direction: row;
 }

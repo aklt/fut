@@ -15,9 +15,8 @@ import './FutApp.css';
 class FutApp extends Component {
 
   static propTypes = {
-    onChangeUrl: PropTypes.func.isRequired,
-    onChangeSelector: PropTypes.func.isRequired,
-    onChangeFilter: PropTypes.func.isRequired
+    charDrop: PropTypes.func.isRequired,
+    charClick: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -27,7 +26,16 @@ class FutApp extends Component {
     super(props);
   }
 
+  charClick = (ch) => {
+    this.props.charClick(ch);
+  }
+
+  charDrop = (dragIndex, dropIndex, ch) => {
+    this.props.charDrop(dragIndex, dropIndex, ch);
+  }
+
   render() {
+    console.warn('FutApp props', this.props);
     let urlButtonOpts = {
       disabled: this.disableSubmit
     }
@@ -42,9 +50,13 @@ class FutApp extends Component {
         <div className="body">
           <CharPicker />
           <ColorPicker />
-          <CharPalette />
+          <CharPalette 
+            chars={this.props.futApp.chars}
+            charClick={this.charClick}
+            charDrop={this.charDrop}
+          />
         </div>
-      <div className="foot">
+        <div className="foot">
         </div>
       </section>
     )

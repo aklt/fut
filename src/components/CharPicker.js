@@ -31,7 +31,6 @@ class CharPicker extends Component {
     });
   }
   shouldComponentUpdate() {
-    console.warn("should update")
     return false;
   }
   componentDidUpdate(prevProps, prevState) {
