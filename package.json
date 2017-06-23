@@ -3,19 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.5",
+    "immutability-helper": "^2.2.2",
+    "isomorphic-fetch": "^2.2.1",
+    "normalizecss": "^3.0.0",
     "react": "^15.6.1",
+    "react-dnd": "^2.4.0",
+    "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "^15.6.1",
     "react-modal": "^2.0.6",
     "react-redux": "^5.0.5",
+    "react-static-container": "^1.0.1",
     "redux": "^3.7.0",
     "redux-logger": "^3.0.6",
+    "redux-saga": "^0.15.3",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "eslint": "^4.0.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "google-closure-compiler": "^20170521.0.0",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
     "react-scripts": "1.0.7"
   },
+  "proxy": "http://localhost:5001",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

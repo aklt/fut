@@ -2,4 +2,32 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-size: 10pt;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 120%;
+}
+
+a {
+  color: #44e;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #44e;
+}
+
+a:active {
+  color: red;
+}
+
+blockquote {
+  color: #888;
+  text-shadow: 3px;
+  text-align: center;
+  font-size: 70%;
 }
