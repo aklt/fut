@@ -16,7 +16,8 @@ class FutApp extends Component {
 
   static propTypes = {
     charDrop: PropTypes.func.isRequired,
-    charClick: PropTypes.func.isRequired
+    charClick: PropTypes.func.isRequired,
+    pickColor: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -48,8 +49,8 @@ class FutApp extends Component {
           </blockquote>
         </div>
         <div className="body">
-          <CharPicker />
-          <ColorPicker />
+          <CharPicker onSelectChar={this.props.pickChar} />
+          <ColorPicker onPickColor={this.props.pickColor} />
           <CharPalette 
             chars={this.props.futApp.chars}
             charClick={this.charClick}

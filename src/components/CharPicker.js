@@ -19,11 +19,6 @@ class CharPicker extends Component {
       console.warn('onSelectChar', ch);
     }
   }
-  constructor(props) {
-    super(props);
-    console.warn("fut", fut);
-    this.props = props;
-  }
   componentDidMount() {
     const { onSelectChar } = this.props;
     fut.charPicker(this.el, (selectedChar) => {
@@ -32,9 +27,6 @@ class CharPicker extends Component {
   }
   shouldComponentUpdate() {
     return false;
-  }
-  componentDidUpdate(prevProps, prevState) {
-    console.warn("did update")
   }
   render() {
     return (

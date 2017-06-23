@@ -22,13 +22,9 @@ const charSource = {
 }
 
 const charTarget = {
-  // shamelessly copied
   drop(props, monitor, component) {
 	const dragIndex = monitor.getItem().index;
 	const hoverIndex = props.index; 
-
-	if (dragIndex === hoverIndex) return;
-    console.warn('pp', props)
     return {
       dragIndex,
       hoverIndex
@@ -47,14 +43,20 @@ class CharPaletteChar extends Component {
     moveChar: PropTypes.func.isRequired
   }
   render() {
-    const { connectDragSource,
-            connectDropTarget,
-            isDragging,
-            char } = this.props;
+    const {
+      char,
+      color,
+      connectDragSource,
+      connectDropTarget,
+      index,
+      isDragging,
+    } = this.props;
     return connectDragSource(connectDropTarget(
       <button style={{
-          opacity: isDragging ? 0.5 : 1,
+          opacity: isDragging ? 0.2 : 1,
+          color: color
         }}
+        data-index={index}
       >
         {char}
       </button>

@@ -2,7 +2,9 @@ import { connect } from 'react-redux';
 import FutApp from '../components/FutApp.js';
 import {
   charDrop,
-  charClick
+  charClick,
+  pickColor,
+  pickChar
 } from '../redux/modules/futApp'
 
 function mapStateToProps (state, ownProps) {
@@ -18,14 +20,13 @@ function mapDispatchToProps (dispatch, ownProps) {
     },
     charClick: (ch) => {
       return dispatch(charClick(ch));
+    },
+    pickColor: (color) => {
+      return dispatch(pickColor(color));
+    },
+    pickChar: (char) => {
+      return dispatch(pickChar(char));
     }
-
-//    onChangeUrl: (value) => { return dispatch(onChangeUrl(value)); },
-//    onChangeSelector: (value) => { 
-//      console.warn('XXX', value);
-//      return dispatch(onChangeSelector(value)); },
-//    onChangeFilter: (value) => { return dispatch(onChangeFilter(value)); },
-//    asyncFilter: (string) => { return dispatch(asyncFilter(string)); }
   };
 }
 
