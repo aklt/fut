@@ -3,3 +3,7 @@ div.body {
   display: flex;
   flex-direction: row;
 }
+
+div.mid {
+  margin: 1em;
+}

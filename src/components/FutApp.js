@@ -2,13 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 // import entities from 'entities';
 
-import Input from './Input';
-import TextArea from './TextArea';
-
-import LayerStack from './LayerStack';
 import CharPicker from './CharPicker';
 import ColorPicker from './ColorPicker';
 import CharPalette from './CharPalette';
+
+import Slider from './Slider';
 
 import './FutApp.css';
 
@@ -23,10 +21,6 @@ class FutApp extends Component {
   static defaultProps = {
   }
 
-  constructor (props) {
-    super(props);
-  }
-
   charClick = (ch) => {
     this.props.charClick(ch);
   }
@@ -37,9 +31,6 @@ class FutApp extends Component {
 
   render() {
     console.warn('FutApp props', this.props);
-    let urlButtonOpts = {
-      disabled: this.disableSubmit
-    }
     return (
       <section className="container">
         <div className="head">
@@ -49,8 +40,13 @@ class FutApp extends Component {
           </blockquote>
         </div>
         <div className="body">
-          <CharPicker onSelectChar={this.props.pickChar} />
-          <ColorPicker onPickColor={this.props.pickColor} />
+          <CharPicker
+            onSelectChar={this.props.pickChar} />
+          <div className="mid">
+            <ColorPicker
+              onPickColor={this.props.pickColor} />
+            <Slider />
+          </div>
           <CharPalette 
             chars={this.props.futApp.chars}
             charClick={this.charClick}

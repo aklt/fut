@@ -1,9 +1,5 @@
 
-/* global fut */
-
-import PropTypes from 'prop-types';
 import React, { Component } from "react";
-import StaticContainer from "react-static-container";
 
 import "./LayerStack.css";
 
