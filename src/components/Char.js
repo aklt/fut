@@ -32,7 +32,7 @@ const charTarget = {
   }
 }                                 
 
-class CharPaletteChar extends Component {
+class Char extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
@@ -69,4 +69,4 @@ export default DropTarget(Types.CHAR, charTarget, (connect) => ({
 }))(DragSource(Types.CHAR, charSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()
-}))(CharPaletteChar));
+}))(Char));

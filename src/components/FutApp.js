@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import CharPicker from './CharPicker';
 import ColorPicker from './ColorPicker';
-import CharPalette from './CharPalette';
+import LayerStack from './LayerStack';
 
 import Slider from './Slider';
 
@@ -47,7 +47,7 @@ class FutApp extends Component {
               onPickColor={this.props.pickColor} />
             <Slider />
           </div>
-          <CharPalette 
+          <LayerStack 
             chars={this.props.futApp.chars}
             charClick={this.charClick}
             charDrop={this.charDrop}

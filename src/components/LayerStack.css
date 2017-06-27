@@ -1,4 +1,16 @@
 .layer-stack {
+  border: 1px solid red;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  min-height: 15pt;
+  min-width: 15pt;
+  margin: 0 auto;
+}
+
+.layer-stack button {
+  background-color: white;
+  border: 1px solid blue;
+  font-size: 12pt;
+  font: Courier\ New;
+  text-align: center;
 }
