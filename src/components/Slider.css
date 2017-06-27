@@ -1,0 +1,15 @@
+.slider {
+  width: 100%;
+}
+
+.slider__name {
+  position: relative;
+  width: 18%;
+  bottom: -18px;
+}
+
+.slider__rcslider {
+  left: 16%;
+  top: 2px;
+  width: 88%;
+}

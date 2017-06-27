@@ -45,7 +45,13 @@ class FutApp extends Component {
           <div className="mid">
             <ColorPicker
               onPickColor={this.props.pickColor} />
-            <Slider />
+            <Slider name="X" min={0} max={32} />
+            <Slider name="Y" min={0} max={32} />
+            <Slider name="Width" min={0} max={32} />
+            <Slider name="Height" min={0} max={32} />
+            <Slider name="Scale X" min={0} max={32} />
+            <Slider name="Scale Y" min={0} max={32} />
+            <Slider name="Rotate" min={0} max={32} />
           </div>
           <LayerStack 
             chars={this.props.futApp.chars}
