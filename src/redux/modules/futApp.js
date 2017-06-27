@@ -6,6 +6,7 @@ export const CHAR_DROP = 'fut/futApp/CHAR_DROP';
 export const CHAR_CLICK = 'fut/futApp/CHAR_CLICK';
 export const PICK_COLOR = 'fut/futApp/PICK_COLOR';
 export const PICK_CHAR = 'fut/futApp/PICK_CHAR';
+export const SLIDER_CHANGE = 'fut/futApp/SLIDER_CHANGE';
 
 export function charDrop (dragIndex, hoverIndex, dragChar) {
   return {
@@ -37,6 +38,14 @@ export function pickChar (char) {
   }
 }
 
+export function sliderChange (slider, value) {
+  return {
+    type: SLIDER_CHANGE,
+    slider,
+    value
+  }
+}
+
 // TODO Set initial state in UI
 const initialState = {
   activeIndex:  0,
@@ -65,6 +74,10 @@ export default function reducer(state = initialState, action = {}) {
       return update(state, {chars: {
         [state.activeIndex]: {$merge: {char: action.char}}
       }})
+  case SLIDER_CHANGE:
+    return update(state, {chars: {
+      [state.activeIndex]: {$merge: {[action.slider]: action.value}}
+    }})
     default:
       return state;
   }

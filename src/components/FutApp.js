@@ -15,7 +15,8 @@ class FutApp extends Component {
   static propTypes = {
     charDrop: PropTypes.func.isRequired,
     charClick: PropTypes.func.isRequired,
-    pickColor: PropTypes.func.isRequired
+    pickColor: PropTypes.func.isRequired,
+    sliderChange: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -27,6 +28,12 @@ class FutApp extends Component {
 
   charDrop = (dragIndex, dropIndex, ch) => {
     this.props.charDrop(dragIndex, dropIndex, ch);
+  }
+
+  sliderChange = (slider) => {
+    return (value) => {
+      this.props.sliderChange(slider, value);
+    }
   }
 
   render() {
@@ -45,13 +52,20 @@ class FutApp extends Component {
           <div className="mid">
             <ColorPicker
               onPickColor={this.props.pickColor} />
-            <Slider name="X" min={0} max={32} />
-            <Slider name="Y" min={0} max={32} />
-            <Slider name="Width" min={0} max={32} />
-            <Slider name="Height" min={0} max={32} />
-            <Slider name="Scale X" min={0} max={32} />
-            <Slider name="Scale Y" min={0} max={32} />
-            <Slider name="Rotate" min={0} max={32} />
+            <Slider name="X" min={0} max={32}
+              onChange={this.sliderChange('x')} />
+            <Slider name="Y" min={0} max={32}
+              onChange={this.sliderChange('y')} />
+            <Slider name="Width" min={0} max={32}
+              onChange={this.sliderChange('w')} />
+            <Slider name="Height" min={0} max={32}
+              onChange={this.sliderChange('h')} />
+            <Slider name="Scale X" min={0} max={32}
+              onChange={this.sliderChange('sx')} />
+            <Slider name="Scale Y" min={0} max={32}
+              onChange={this.sliderChange('sy')} />
+            <Slider name="Rotate" min={0} max={32}
+              onChange={this.sliderChange('r')} />
           </div>
           <LayerStack 
             chars={this.props.futApp.chars}

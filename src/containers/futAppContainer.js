@@ -4,7 +4,8 @@ import {
   charDrop,
   charClick,
   pickColor,
-  pickChar
+  pickChar,
+  sliderChange
 } from '../redux/modules/futApp'
 
 function mapStateToProps (state, ownProps) {
@@ -26,6 +27,9 @@ function mapDispatchToProps (dispatch, ownProps) {
     },
     pickChar: (char) => {
       return dispatch(pickChar(char));
+    },
+    sliderChange: (slider, value) => {
+      return dispatch(sliderChange(slider, value));
     }
   };
 }
