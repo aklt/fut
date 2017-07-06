@@ -72,7 +72,15 @@ class Char extends Component {
       </button>
     ))
   }
-}                 
+
+  componentDidUpdate() {
+    console.warn('Char', this.props)
+    if (this.props.focus) {
+      this.focus();
+      console.warn('focus')
+    }
+  }
+}
 
 export default DropTarget(Types.CHAR, charTarget, (connect) => ({
   connectDropTarget: connect.dropTarget()

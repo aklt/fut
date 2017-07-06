@@ -42,7 +42,10 @@ class LayerStack extends Component {
 
   render() {
     console.warn('layer-stack', this.props);
-    const { chars } = this.props;
+    const {
+      chars,
+      activeIndex
+    } = this.props;
     return (
       <div className="layer-stack" onClick={this.onClick}>
         <div className="layer-stack__buttons">
@@ -51,7 +54,10 @@ class LayerStack extends Component {
         </div>
         <div className="layer-stack__chars">
           {
-            chars.map((char, i) => (
+            chars.map((char, i) => {
+              var props = {};
+              if (i === activeIndex) props.focus = true;
+              return (
                 <Char
                   key={char.id}
                   index={i}
@@ -59,13 +65,14 @@ class LayerStack extends Component {
                   char={char.char} 
                   color={(char.color || '#000').slice(0, 7)}
                   moveChar={this.moveChar}
+                  {...props}
                 />
-            ))}
+              )})
+          }
           </div>
       </div>
     );
   }
 }
-
 
 export default DragDropContext(HTML5Backend)(LayerStack);

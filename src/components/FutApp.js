@@ -42,7 +42,7 @@ class FutApp extends Component {
       chars,
       activeIndex
     } = this.props.futApp;
-    let ch = chars[activeIndex]
+    let ch = chars[activeIndex] || {}
     return (
       <section className="container">
         <div className="head">
@@ -81,6 +81,7 @@ class FutApp extends Component {
           </div>
           <LayerStack 
             chars={this.props.futApp.chars}
+            activeIndex={this.props.futApp.activeIndex}
             charClick={this.charClick}
             charDrop={this.charDrop}
             charAdd={this.props.charAdd}
