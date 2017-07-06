@@ -4,6 +4,8 @@ import getId from '../../getId'
 
 export const CHAR_DROP = 'fut/futApp/CHAR_DROP';
 export const CHAR_CLICK = 'fut/futApp/CHAR_CLICK';
+export const CHAR_ADD = 'fut/futApp/CHAR_ADD';
+export const CHAR_REMOVE = 'fut/futApp/CHAR_REMOVE';
 export const PICK_COLOR = 'fut/futApp/PICK_COLOR';
 export const PICK_CHAR = 'fut/futApp/PICK_CHAR';
 export const SLIDER_CHANGE = 'fut/futApp/SLIDER_CHANGE';
@@ -21,6 +23,18 @@ export function charClick (index) {
   return {
     type: CHAR_CLICK,
     index: index
+  }
+}
+
+export function charAdd () {
+  return {
+    type: CHAR_ADD
+  }
+}
+
+export function charRemove (i) {
+  return {
+    type: CHAR_REMOVE
   }
 }
 
@@ -46,13 +60,17 @@ export function sliderChange (slider, value) {
   }
 }
 
+function makeChar (ch) {
+  return {
+    char: ch,
+    id: getId('char')
+  }
+}
+
 // TODO Set initial state in UI
 const initialState = {
   activeIndex:  0,
-  chars: [ 'A', 'B', 'C' ].map(ch => ({
-    id: getId('char'),
-    char: ch
-  }))
+  chars: [ 'A', 'B', 'C' ].map(makeChar)
 }
 
 export default function reducer(state = initialState, action = {}) {
@@ -66,6 +84,25 @@ export default function reducer(state = initialState, action = {}) {
         ]}});
     case CHAR_CLICK:
       return update(state, {$merge: {activeIndex: action.index}});
+    case CHAR_ADD:
+      let last = state.chars.length;
+      state = update(state, {chars: {
+        $push: [
+          makeChar('X')
+        ]
+      }});
+      return update(state, {$merge: {activeIndex: last}});
+    case CHAR_REMOVE:
+      let active = state.activeIndex;
+      console.warn('SS', active, state)
+      state = update(state, {chars: {
+        $splice: [
+          [state.activeIndex, 1]
+        ]
+      }});
+      if (active > 0) active -= 1;
+      else active = 0
+      return update(state, {$merge: {activeIndex: active}});
     case PICK_COLOR:
       return update(state, {chars: {
         [state.activeIndex]: {$merge: {color: action.color}}

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
 
+import './Char.css';
+
 export const Types = {
   CHAR: 'Char'
 }
@@ -42,6 +44,13 @@ class Char extends Component {
     char: PropTypes.string.isRequired,
     moveChar: PropTypes.func.isRequired
   }
+
+  focus() {
+    if (this.elButton) {
+      this.elButton.focus();
+    }
+  }
+
   render() {
     const {
       char,
@@ -52,11 +61,12 @@ class Char extends Component {
       isDragging,
     } = this.props;
     return connectDragSource(connectDropTarget(
-      <button style={{
+      <button className="char" style={{
           opacity: isDragging ? 0.2 : 1,
           color: color
         }}
         data-index={index}
+        ref={(el) => { this.elButton = el}}
       >
         {char}
       </button>

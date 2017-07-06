@@ -27,6 +27,7 @@ class Slider extends Component {
     onChange: PropTypes.func.isRequired,
     min: PropTypes.number.isRequired,
     max: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
   }
 
   static defaultProps = {

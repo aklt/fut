@@ -3,6 +3,8 @@ import FutApp from '../components/FutApp.js';
 import {
   charDrop,
   charClick,
+  charAdd,
+  charRemove,
   pickColor,
   pickChar,
   sliderChange
@@ -21,6 +23,12 @@ function mapDispatchToProps (dispatch, ownProps) {
     },
     charClick: (ch) => {
       return dispatch(charClick(ch));
+    },
+    charAdd: () => {
+      return dispatch(charAdd());
+    },
+    charRemove: () => {
+      return dispatch(charRemove());
     },
     pickColor: (color) => {
       return dispatch(pickColor(color));
