@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import CharPicker from './CharPicker';
 import ColorPicker from './ColorPicker';
+import Canvas from './Canvas';
 import LayerStack from './LayerStack';
 
 import Slider from './Slider';
@@ -78,6 +79,9 @@ class FutApp extends Component {
             <Slider name="Rotate" min={0} max={32}
               value={ch.r || 0}
               onChange={this.sliderChange('r')} />
+          </div>
+          <div className="mid">
+            <Canvas chars={chars} />
           </div>
           <LayerStack 
             chars={this.props.futApp.chars}
