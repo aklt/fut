@@ -25,14 +25,14 @@ const charSource = {
 
 const charTarget = {
   drop(props, monitor, component) {
-	const dragIndex = monitor.getItem().index;
-	const hoverIndex = props.index; 
+    const dragIndex = monitor.getItem().index;
+    const hoverIndex = props.index;
     return {
       dragIndex,
       hoverIndex
     }
   }
-}                                 
+}
 
 class Char extends Component {
   static propTypes = {
@@ -73,12 +73,17 @@ class Char extends Component {
     ))
   }
 
-  componentDidUpdate() {
-    console.warn('Char', this.props)
+  setFocus() {
     if (this.props.focus) {
       this.focus();
-      console.warn('focus')
     }
+  }
+
+  componentDidMount() {
+    this.setFocus()
+  }
+  componentDidUpdate() {
+    this.setFocus()
   }
 }
 
