@@ -58,11 +58,11 @@ function spriteStringifyOne (o, prev) {
     intToChar(o.char, prev.char),
     intToChar(o.x, prev.x),
     intToChar(o.y, prev.y),
-    intToChar(o.color, prev.color),
-    intToChar(o.size, prev.size),
-    intToChar(o.rot, prev.rot),
-    intToChar(o.scaleX, prev.scaleX),
-    intToChar(o.scaleY, prev.scaleY),
+    intToChar(o.c, prev.c),
+    intToChar(o.sz, prev.sz),
+    intToChar(o.r, prev.r),
+    intToChar(o.sx, prev.sx),
+    intToChar(o.sy, prev.sy),
     intToChar(o.mode, prev.mode)
   ].join('')
 }
@@ -84,11 +84,11 @@ function spriteParseOne (str, prev) {
   result.char = intOfChar(str[0], prev.char)
   result.x = intOfChar(str[1], prev.x || 0, 36)
   result.y = intOfChar(str[2], prev.y || 0, 36)
-  result.color = intOfChar(str[3], prev.color || 0, 36)
-  result.size = intOfChar(str[4], prev.size || 64, 36)
-  result.rot = intOfChar(str[5], prev.rot || 0, 36)
-  result.scaleX = intOfChar(str[6], prev.scaleX || 1, 36)
-  result.scaleY = intOfChar(str[7], prev.scaleY || 1, 36)
+  result.c = intOfChar(str[3], prev.c || 0, 36)
+  result.sz = intOfChar(str[4], prev.sz || 64, 36)
+  result.r = intOfChar(str[5], prev.r || 0, 36)
+  result.sx = intOfChar(str[6], prev.sx || 1, 36)
+  result.sy = intOfChar(str[7], prev.sy || 1, 36)
   result.mode = str[8]
     ? (str[8] === '-' ? 'stroke' : 'fill')
     : (prev.mode || 'fill')
@@ -96,7 +96,8 @@ function spriteParseOne (str, prev) {
 }
 
 function splitAt (str, length) {
-  assert(str.length % length === 0, 'Multiplum')
+  // FIXME
+  // assert(str.length % length === 0, 'Multiplum')
   var res = []
   while (str.length > 0) {
     res.push(str.substr(0, length))
@@ -121,14 +122,14 @@ function spriteParse (ss) {
 function scale (obj, divisor) {
   var res = {}
   res.char = obj.char
-  res.color = obj.color
-  res.size = obj.size
-  res.rot = obj.rot
+  res.c = obj.c
+  res.sz = obj.sz
+  res.r = obj.r
   res.mode = obj.mode
   res.x = (obj.x - 17) / divisor
   res.y = (obj.y - 17) / divisor
-  res.scaleX = (obj.scaleX - 17) / divisor
-  res.scaleY = (obj.scaleY - 17) / divisor
+  res.sx = (obj.sx - 17) / divisor
+  res.sy = (obj.sy - 17) / divisor
   return res
 }
 
@@ -152,16 +153,16 @@ function spritePaint (ctx, cs, ps, ss, x, y) {
     var ox = o.x - 18
     var oy = o.y - 18
     // Scale up to 4,5 the original size
-    var sx = (o.scaleX - 17) / 4
-    var sy = (o.scaleY - 17) / 4
+    var sx = (o.sx - 17) / 4
+    var sy = (o.sy - 17) / 4
     var tx = (ox + x) / sx
     var ty = (oy + y) / sy
     ctx.save()
-    ctx.font = o.size + 'px arial'
+    ctx.font = o.sz + 'px arial'
     ctx.scale(sx, sy)
     // Rotate
     ctx.translate(tx, ty)
-    ctx.rotate((Math.PI / 180) * (360 / 36) * o.rot)
+    ctx.rotate((Math.PI / 180) * (360 / 36) * o.r)
     ctx.translate(-tx, -ty)
     // @dev
     //ctx.save()
@@ -171,9 +172,9 @@ function spritePaint (ctx, cs, ps, ss, x, y) {
     // @end
 
     // XXX mode is fixed and borked
-    // ctx[o.mode + 'Style'] = '#' + ps[o.color]
+    // ctx[o.mode + 'Style'] = '#' + ps[o.c]
     // ctx[o.mode + 'Text'](cs[o.char], tx, ty)
-    ctx['fillStyle'] = '#' + ps[o.color]
+    ctx['fillStyle'] = '#' + ps[o.c]
     ctx['fillText'](cs[o.char], tx, ty)
     ctx.restore()
   }
@@ -184,7 +185,8 @@ function spritePaint (ctx, cs, ps, ss, x, y) {
 if (typeof module !== 'undefined') {
   module.exports = {
     stringify: spriteStringify,
-    parse: spriteParse
+    parse: spriteParse,
+    paint: spritePaint
   }
 }
 // @end

@@ -58,30 +58,36 @@ class FutApp extends Component {
           <div className="mid">
             <ColorPicker
               onPickColor={this.props.pickColor} />
-            <Slider name="X" min={0} max={32}
+            <Slider name="X" min={0} max={35}
               value={ch.x || 0}
               onChange={this.sliderChange('x')} />
-            <Slider name="Y" min={0} max={32}
+            <Slider name="Y" min={0} max={35}
               value={ch.y || 0}
               onChange={this.sliderChange('y')} />
-            <Slider name="Width" min={0} max={32}
-              value={ch.w || 32}
+            <Slider name="Width" min={0} max={35}
+              value={ch.w || 35}
               onChange={this.sliderChange('w')} />
-            <Slider name="Height" min={0} max={32}
-              value={ch.h || 32}
+            <Slider name="Height" min={0} max={35}
+              value={ch.h || 35}
               onChange={this.sliderChange('h')} />
-            <Slider name="Scale X" min={0} max={32}
+            <Slider name="Size" min={0} max={35}
+              value={ch.sz || 35}
+              onChange={this.sliderChange('sz')} />
+            <Slider name="Scale X" min={0} max={35}
               value={ch.sx || 0}
               onChange={this.sliderChange('sx')} />
-            <Slider name="Scale Y" min={0} max={32}
+            <Slider name="Scale Y" min={0} max={35}
               value={ch.sy || 0}
               onChange={this.sliderChange('sy')} />
-            <Slider name="Rotate" min={0} max={32}
+            <Slider name="Rotate" min={0} max={35}
               value={ch.r || 0}
               onChange={this.sliderChange('r')} />
           </div>
           <div className="mid">
-            <Canvas chars={chars} />
+            <Canvas chars={chars}
+                    width={200}
+                    height={200}
+                  />
           </div>
           <LayerStack 
             chars={this.props.futApp.chars}
