@@ -61,10 +61,13 @@ export function sliderChange (slider, value) {
 }
 
 function makeChar (ch) {
-  return {
-    char: ch,
-    id: getId('char')
+  if (typeof ch === 'string') {
+    return {
+      char: ch,
+      id: getId('char')
+    }
   }
+  return Object.assign({}, ch, {id: getId('char')});
 }
 
 // TODO Set initial state in UI
@@ -85,16 +88,16 @@ export default function reducer(state = initialState, action = {}) {
     case CHAR_CLICK:
       return update(state, {$merge: {activeIndex: action.index}});
     case CHAR_ADD:
-      let last = state.chars.length;
+      let end = state.chars.length;
       state = update(state, {chars: {
         $push: [
-          makeChar('X')
+          makeChar(state.chars[state.activeIndex])
         ]
       }});
-      return update(state, {$merge: {activeIndex: last}});
+      return update(state, {$merge: {activeIndex: end}});
     case CHAR_REMOVE:
+      if (state.chars.length === 1) return state;
       let active = state.activeIndex;
-      console.warn('SS', active, state)
       state = update(state, {chars: {
         $splice: [
           [state.activeIndex, 1]

@@ -4,3 +4,7 @@ button.char {
   font-family: "Courier New";
   text-align: center;
 }
+
+.char.selected {
+  border: 1px solid #99E;
+}

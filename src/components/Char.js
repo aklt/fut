@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
+import cn from 'classnames';
 
 import './Char.css';
 
@@ -45,12 +46,6 @@ class Char extends Component {
     moveChar: PropTypes.func.isRequired
   }
 
-  focus() {
-    if (this.elButton) {
-      this.elButton.focus();
-    }
-  }
-
   render() {
     const {
       char,
@@ -61,7 +56,10 @@ class Char extends Component {
       isDragging,
     } = this.props;
     return connectDragSource(connectDropTarget(
-      <button className="char" style={{
+      <button className={cn({
+        char: true,
+        selected: this.selected
+          })} style={{
           opacity: isDragging ? 0.2 : 1,
           color: color
         }}
@@ -73,17 +71,21 @@ class Char extends Component {
     ))
   }
 
-  setFocus() {
-    if (this.props.focus) {
-      this.focus();
+  select(on) {
+    this.selected = !!on;
+  }
+
+  focus() {
+    if (this.elButton) {
+      this.elButton.focus();
     }
   }
 
   componentDidMount() {
-    this.setFocus()
+    if (this.props.focus) this.focus()
   }
   componentDidUpdate() {
-    this.setFocus()
+    if (this.props.focus) this.focus()
   }
 }
 

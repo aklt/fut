@@ -85,7 +85,7 @@ function spriteParseOne (str, prev) {
   result.x = intOfChar(str[1], prev.x || 0, 36)
   result.y = intOfChar(str[2], prev.y || 0, 36)
   result.c = intOfChar(str[3], prev.c || 0, 36)
-  result.sz = intOfChar(str[4], prev.sz || 64, 36)
+  result.sz = intOfChar(str[4], prev.sz || 18, 36)
   result.r = intOfChar(str[5], prev.r || 0, 36)
   result.sx = intOfChar(str[6], prev.sx || 1, 36)
   result.sy = intOfChar(str[7], prev.sy || 1, 36)
@@ -96,8 +96,7 @@ function spriteParseOne (str, prev) {
 }
 
 function splitAt (str, length) {
-  // FIXME
-  // assert(str.length % length === 0, 'Multiplum')
+  assert(str.length % length === 0, 'Multiplum')
   var res = []
   while (str.length > 0) {
     res.push(str.substr(0, length))
@@ -108,11 +107,13 @@ function splitAt (str, length) {
 
 // parse all sprite strings into an array of objects
 function spriteParse (ss) {
+  if (!ss) return '';
   if (!Array.isArray(ss)) ss = splitAt(ss, 9)
   var res = [spriteParseOne(ss[0], {})]
   for (var i = 1; i < ss.length; i += 1) {
     res.push(spriteParseOne(ss[i], res[i - 1]))
   }
+  console.warn('spriteParse', ss, res);
   return res
 }
 
@@ -165,16 +166,16 @@ function spritePaint (ctx, cs, ps, ss, x, y) {
     ctx.rotate((Math.PI / 180) * (360 / 36) * o.r)
     ctx.translate(-tx, -ty)
     // @dev
-    //ctx.save()
-    //ctx.fillStyle = '#A11'
-    //ctx.fillRect(tx, ty, 1, 1)
-    //ctx.restore()
+    ctx.save()
+    ctx.fillStyle = '#A11'
+    ctx.fillRect(tx, ty, 1, 1)
+    ctx.restore()
     // @end
 
     // XXX mode is fixed and borked
     // ctx[o.mode + 'Style'] = '#' + ps[o.c]
     // ctx[o.mode + 'Text'](cs[o.char], tx, ty)
-    ctx['fillStyle'] = '#' + ps[o.c]
+    ctx['fillStyle'] = '#' + ps[o.c].slice(0,  6)
     ctx['fillText'](cs[o.char], tx, ty)
     ctx.restore()
   }

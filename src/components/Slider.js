@@ -19,6 +19,7 @@ class Slider extends Component {
         <RcSlider id={id}
                   className="slider__rcslider"
                   {...props} />
+        <input type="text" className="slider__value" value={props.value} />
       </div>
     )
   }

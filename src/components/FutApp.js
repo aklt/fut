@@ -48,9 +48,6 @@ class FutApp extends Component {
       <section className="container">
         <div className="head">
           <h1>Fut Maker</h1>
-          <blockquote>
-            Fut for speed
-          </blockquote>
         </div>
         <div className="body">
           <CharPicker
@@ -59,28 +56,22 @@ class FutApp extends Component {
             <ColorPicker
               onPickColor={this.props.pickColor} />
             <Slider name="X" min={0} max={35}
-              value={ch.x || 0}
+              value={ch.x}
               onChange={this.sliderChange('x')} />
             <Slider name="Y" min={0} max={35}
-              value={ch.y || 0}
+              value={ch.y}
               onChange={this.sliderChange('y')} />
-            <Slider name="Width" min={0} max={35}
-              value={ch.w || 35}
-              onChange={this.sliderChange('w')} />
-            <Slider name="Height" min={0} max={35}
-              value={ch.h || 35}
-              onChange={this.sliderChange('h')} />
             <Slider name="Size" min={0} max={35}
-              value={ch.sz || 35}
+              value={ch.sz}
               onChange={this.sliderChange('sz')} />
             <Slider name="Scale X" min={0} max={35}
-              value={ch.sx || 0}
+              value={ch.sx}
               onChange={this.sliderChange('sx')} />
             <Slider name="Scale Y" min={0} max={35}
-              value={ch.sy || 0}
+              value={ch.sy}
               onChange={this.sliderChange('sy')} />
             <Slider name="Rotate" min={0} max={35}
-              value={ch.r || 0}
+              value={ch.r}
               onChange={this.sliderChange('r')} />
           </div>
           <div className="mid">
