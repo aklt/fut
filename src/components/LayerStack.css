@@ -1,4 +1,16 @@
 .layer-stack {
+  border: 1px solid red;
+  font-family: Monospace;
+  margin: 0 auto;
+}
+
+.layer-stack__chars {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  min-height: 15pt;
+  min-width: 15pt;
+}
+
+.layer-stack__buttons {
+  font-weight: bold;
 }

@@ -1,0 +1,24 @@
+.slider {
+  width: 100%;
+}
+
+.slider__name {
+  position: relative;
+  width: 18%;
+  bottom: -14px;
+}
+
+.slider__rcslider {
+  padding: 0;
+  margin: 0;
+  left: 120px;
+  top: 2px;
+  width: 70%;
+}
+
+.slider__value {
+  position: relative;
+  width: 8%;
+  left: 60px;
+  bottom: 20px;
+}
