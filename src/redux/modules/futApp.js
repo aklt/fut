@@ -60,20 +60,29 @@ export function sliderChange (slider, value) {
   }
 }
 
+var defaultChar = {
+  x: 18,
+  y: 18,
+  sz: 18,
+  sx: 18,
+  sy: 18,
+  r: 0,
+}
+
 function makeChar (ch) {
   if (typeof ch === 'string') {
-    return {
+    return Object.assign({}, defaultChar, {
       char: ch,
       id: getId('char')
-    }
+    })
   }
-  return Object.assign({}, ch, {id: getId('char')});
+  return Object.assign({}, defaultChar, ch, {id: getId('char')});
 }
 
 // TODO Set initial state in UI
 const initialState = {
   activeIndex:  0,
-  chars: [ 'A', 'B', 'C' ].map(makeChar)
+  chars: [ 'C' ].map(makeChar)
 }
 
 export default function reducer(state = initialState, action = {}) {

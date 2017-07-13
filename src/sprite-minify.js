@@ -6,17 +6,22 @@ function minifyColor (c) {
   return c
 }
 
+function num (n, defaultN) {
+  if (typeof n === 'number') return n
+  return defaultN
+}
+
 function convertStateCharsToObject (achars) {
   var mid = 18
   return achars.map((ch) => {
     var r = {char: ch.char}
-    r.x =  ch.x  || mid;
-    r.y =  ch.y  || mid;
-    r.sx = ch.sx || mid;
-    r.sy = ch.sy || mid;
-    r.r =  ch.r  || 0;
-    r.sz = ch.sz || mid;
-    r.c =  ch.color  || '#555';
+    r.x  = num(ch.x, mid);
+    r.y  = num(ch.y, mid);
+    r.sx = num(ch.sx, mid);
+    r.sy = num(ch.sy, mid);
+    r.r  = num(ch.r, 0);
+    r.sz = num(ch.sz, mid);
+    r.c  = ch.color  || '#555';
     return r;
   })
 }
@@ -26,7 +31,6 @@ function formatSpritesToIndexed (sprites) {
   var palette = {}
   var chars = {}
   var s0 = convertStateCharsToObject(sprites);
-  console.warn('s0', s0);
   var palCount = 0
   var charCount = 0
   var i

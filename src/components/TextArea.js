@@ -16,7 +16,7 @@ export default class TextArea extends Component {
     cols: PropTypes.number,
     disabled: PropTypes.bool,
     rows: PropTypes.number,
-    value: PropTypes.string
+    value: PropTypes.string,
   }
 
   static defaultProps = {
@@ -36,7 +36,6 @@ export default class TextArea extends Component {
         ref={(el) => { this.el = el; }}
         cols={this.props.cols}
         value={this.props.value}
-        onChange={this.onChange}
         {...opts}
       >
       </textarea>

@@ -42,7 +42,7 @@ class Canvas extends Component {
       ctx.save();
       ctx.scale(scale, scale);
       ctx.clearRect(0, 0, width, height);
-      var res = futSpriteMinify(chars, {x, y, sz});
+      var res = futSpriteMinify(chars);
       futSprite.paint(this.context2d, res.chars, res.pal.split(/\|/), futSprite.parse(res.sprites), x, y);
       ctx.restore();
     }

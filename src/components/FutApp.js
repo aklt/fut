@@ -6,7 +6,7 @@ import CharPicker from './CharPicker';
 import ColorPicker from './ColorPicker';
 import Canvas from './Canvas';
 import LayerStack from './LayerStack';
-
+import TextArea from './TextArea';
 import Slider from './Slider';
 
 import './FutApp.css';
@@ -79,6 +79,7 @@ class FutApp extends Component {
                     width={200}
                     height={200}
                   />
+            <TextArea readonly value={23} />
           </div>
           <LayerStack 
             chars={this.props.futApp.chars}
