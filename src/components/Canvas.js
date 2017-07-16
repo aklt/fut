@@ -43,7 +43,8 @@ class Canvas extends Component {
       ctx.scale(scale, scale);
       ctx.clearRect(0, 0, width, height);
       var res = futSpriteMinify(chars);
-      futSprite.paint(this.context2d, res.chars, res.pal.split(/\|/), futSprite.parse(res.sprites), x, y);
+      var [resChars, resPal, resSprites] = res.split(/\t/)
+      futSprite.paint(this.context2d, resChars, resPal.split(/\|/), futSprite.parse(resSprites), x, y);
       ctx.restore();
     }
   }

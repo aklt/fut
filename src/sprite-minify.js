@@ -74,13 +74,9 @@ function formatSpritesToIndexed (sprites) {
   return res
 }
 
-function formatToJson (sprites) {
+function minify (sprites) {
   var s1 = formatSpritesToIndexed(sprites)
-  return {
-    chars: s1.chars.join(''),
-    pal: s1.pals.join('|'),
-    sprites: ss.stringify(s1.sprites)
-  }
+  return [s1.chars.join(''), s1.pals.join('|'), ss.stringify(s1.sprites)].join('\t')
 }
 
-module.exports = formatToJson;
+module.exports = minify;

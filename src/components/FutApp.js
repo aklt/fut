@@ -9,6 +9,8 @@ import LayerStack from './LayerStack';
 import TextArea from './TextArea';
 import Slider from './Slider';
 
+import futSpriteMinify from '../sprite-minify';
+
 import './FutApp.css';
 
 class FutApp extends Component {
@@ -35,6 +37,16 @@ class FutApp extends Component {
     return (value) => {
       this.props.sliderChange(slider, value);
     }
+  }
+
+  constructor (props) {
+    super(props);
+    this.state = {sprites: ''}
+  }
+
+  componentWillUpdate(newProps) {
+    if (!newProps) return;
+    this.sprites = '"' + futSpriteMinify(newProps.futApp.chars) + '"'
   }
 
   render() {
@@ -79,7 +91,6 @@ class FutApp extends Component {
                     width={200}
                     height={200}
                   />
-            <TextArea readonly value={23} />
           </div>
           <LayerStack 
             chars={this.props.futApp.chars}
@@ -91,6 +102,7 @@ class FutApp extends Component {
           />
         </div>
         <div className="foot">
+          <TextArea className="mid" readonly value={this.sprites} />
         </div>
       </section>
     )
