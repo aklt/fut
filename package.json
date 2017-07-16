@@ -14,6 +14,7 @@
     "react-dom": "^15.6.1",
     "react-modal": "^2.0.6",
     "react-redux": "^5.0.5",
+    "react-scripts": "1.0.10",
     "react-static-container": "^1.0.1",
     "redux": "^3.7.0",
     "redux-logger": "^3.0.6",
@@ -25,8 +26,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "google-closure-compiler": "^20170521.0.0",
     "jest": "^20.0.4",
-    "jest-cli": "^20.0.4",
-    "react-scripts": "1.0.7"
+    "jest-cli": "^20.0.4"
   },
   "proxy": "http://localhost:5001",
   "scripts": {
