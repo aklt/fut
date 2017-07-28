@@ -9,6 +9,9 @@ export const CHAR_REMOVE = 'fut/futApp/CHAR_REMOVE';
 export const PICK_COLOR = 'fut/futApp/PICK_COLOR';
 export const PICK_CHAR = 'fut/futApp/PICK_CHAR';
 export const SLIDER_CHANGE = 'fut/futApp/SLIDER_CHANGE';
+export const GROUP_ADD = 'fut/futApp/GROUP_ADD';
+export const GROUP_SET_END = 'fut/futApp/GROUP_SET_END';
+export const GROUP_CREATE = 'fut/futApp/GROUP_CREATE';
 
 export function charDrop (dragIndex, hoverIndex, dragChar) {
   return {
@@ -57,6 +60,26 @@ export function sliderChange (slider, value) {
     type: SLIDER_CHANGE,
     slider,
     value
+  }
+}
+
+export function groupSetEnd (index) {
+  return {
+    type: GROUP_SET_END,
+    index
+  }
+}
+
+export function groupAdd (index) {
+  return {
+    type: GROUP_ADD,
+    index
+  }
+}
+
+export function groupCreate (name) {
+  return {
+    type: GROUP_CREATE
   }
 }
 
@@ -127,6 +150,14 @@ export default function reducer(state = initialState, action = {}) {
     return update(state, {chars: {
       [state.activeIndex]: {$merge: {[action.slider]: action.value}}
     }})
+  case GROUP_CREATE:
+
+    break;
+    // case GROUP_ADD:
+    // careturn update(state, {})
+    // cabreak;
+    // case GROUP_SET_END:
+    // cabreak;
     default:
       return state;
   }

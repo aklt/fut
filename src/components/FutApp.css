@@ -5,5 +5,14 @@ div.body {
 }
 
 div.mid {
+  display: flex;
+  flex-direction: column;
   margin: 1em;
+}
+
+textarea.fullwidth {
+  position: absolute;
+  resize: none;
+  width: 700px;
+  color: #eff;
 }

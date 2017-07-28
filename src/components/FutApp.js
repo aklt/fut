@@ -8,91 +8,105 @@ import Canvas from './Canvas';
 import LayerStack from './LayerStack';
 import TextArea from './TextArea';
 import Slider from './Slider';
+import Pal from './Pal';
 
 import futSpriteMinify from '../sprite-minify';
 
 import './FutApp.css';
 
 class FutApp extends Component {
-
   static propTypes = {
     charDrop: PropTypes.func.isRequired,
     charClick: PropTypes.func.isRequired,
     pickColor: PropTypes.func.isRequired,
-    sliderChange: PropTypes.func.isRequired
-  }
+    sliderChange: PropTypes.func.isRequired,
+  };
 
-  static defaultProps = {
-  }
-
-  charClick = (ch) => {
+  charClick = ch => {
     this.props.charClick(ch);
-  }
+  };
 
   charDrop = (dragIndex, dropIndex, ch) => {
     this.props.charDrop(dragIndex, dropIndex, ch);
-  }
+  };
 
-  sliderChange = (slider) => {
-    return (value) => {
+  sliderChange = slider => {
+    return value => {
       this.props.sliderChange(slider, value);
-    }
-  }
+    };
+  };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
-    this.state = {sprites: ''}
+    this.state = {sprites: ''};
   }
 
   componentWillUpdate(newProps) {
     if (!newProps) return;
-    this.sprites = '"' + futSpriteMinify(newProps.futApp.chars) + '"'
+    this.sprites = '"' + futSpriteMinify(newProps.futApp.chars) + '"';
   }
 
   render() {
     console.warn('FutApp props', this.props);
-    const {
-      chars,
-      activeIndex
-    } = this.props.futApp;
-    let ch = chars[activeIndex] || {}
+    const {chars, activeIndex} = this.props.futApp;
+    let ch = chars[activeIndex] || {};
     return (
       <section className="container">
         <div className="head">
           <h1>Fut Maker</h1>
         </div>
         <div className="body">
-          <CharPicker
-            onSelectChar={this.props.pickChar} />
+          <CharPicker onSelectChar={this.props.pickChar} />
           <div className="mid">
-            <ColorPicker
-              onPickColor={this.props.pickColor} />
-            <Slider name="X" min={0} max={35}
+            <ColorPicker onPickColor={this.props.pickColor} />
+            <Slider
+              name="X"
+              min={0}
+              max={35}
               value={ch.x}
-              onChange={this.sliderChange('x')} />
-            <Slider name="Y" min={0} max={35}
+              onChange={this.sliderChange('x')}
+            />
+            <Slider
+              name="Y"
+              min={0}
+              max={35}
               value={ch.y}
-              onChange={this.sliderChange('y')} />
-            <Slider name="Size" min={0} max={35}
+              onChange={this.sliderChange('y')}
+            />
+            <Slider
+              name="Size"
+              min={0}
+              max={35}
               value={ch.sz}
-              onChange={this.sliderChange('sz')} />
-            <Slider name="Scale X" min={0} max={35}
+              onChange={this.sliderChange('sz')}
+            />
+            <Slider
+              name="Scale X"
+              min={0}
+              max={35}
               value={ch.sx}
-              onChange={this.sliderChange('sx')} />
-            <Slider name="Scale Y" min={0} max={35}
+              onChange={this.sliderChange('sx')}
+            />
+            <Slider
+              name="Scale Y"
+              min={0}
+              max={35}
               value={ch.sy}
-              onChange={this.sliderChange('sy')} />
-            <Slider name="Rotate" min={0} max={35}
+              onChange={this.sliderChange('sy')}
+            />
+            <Slider
+              name="Rotate"
+              min={0}
+              max={35}
               value={ch.r}
-              onChange={this.sliderChange('r')} />
+              onChange={this.sliderChange('r')}
+            />
           </div>
           <div className="mid">
-            <Canvas chars={chars}
-                    width={200}
-                    height={200}
-                  />
+            <Canvas chars={chars} width={200} height={200} />
+            <Pal />
           </div>
-          <LayerStack 
+          <LayerStack
             chars={this.props.futApp.chars}
             activeIndex={this.props.futApp.activeIndex}
             charClick={this.charClick}
@@ -102,10 +116,15 @@ class FutApp extends Component {
           />
         </div>
         <div className="foot">
-          <TextArea className="mid" readonly value={this.sprites} />
+          <TextArea
+            className="fullwidth"
+            cols={200}
+            readonly
+            value={this.sprites}
+          />
         </div>
       </section>
-    )
+    );
   }
 }
 
