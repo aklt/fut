@@ -13,6 +13,7 @@
     "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "^15.6.1",
     "react-modal": "^2.0.6",
+    "react-radio-group": "^3.0.2",
     "react-redux": "^5.0.5",
     "react-scripts": "1.0.10",
     "react-static-container": "^1.0.1",

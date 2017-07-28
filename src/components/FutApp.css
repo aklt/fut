@@ -16,3 +16,11 @@ textarea.fullwidth {
   color: #24a;
   font-weight: 600;
 }
+
+.paintMode input {
+  margin-right: 0.3em;
+}
+
+.paintMode label {
+  margin-right: 0.5em;
+}

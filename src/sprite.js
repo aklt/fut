@@ -23,13 +23,58 @@
 //
 // colors are an index innto a color array
 
+class Fut {
+  /**
+  * @param {string} chars
+  * @param {Array<string>} pal
+  * @param {string} vars
+  */
+  constructor(chars, pal, vars) {
+    this.chars = chars;
+    this.pal = pal;
+    this.v = spriteParse(vars);
+  }
+
+  /**
+   * @param {Element} ctx
+   * @param {number} x
+   * @param {number} y
+   */
+  paint(ctx, x, y) {
+    ctx.save();
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    for (var i = 0; i < this.v.length; i += 1) {
+      var o = this.v.ss[i];
+      var ox = o.x - 18;
+      var oy = o.y - 18;
+      // Scale up to 4,5 the original size
+      var sx = (o.sx - 17) / 4;
+      var sy = (o.sy - 17) / 4;
+      var tx = (ox + x) / sx;
+      var ty = (oy + y) / sy;
+      ctx.save();
+      ctx.font = o.sz + 'px arial';
+      ctx.scale(sx, sy);
+      // Rotate
+      ctx.translate(tx, ty);
+      ctx.rotate(Math.PI / 180 * (360 / 36) * o.r);
+      ctx.translate(-tx, -ty);
+      ctx[o.mode + 'Style'] = '#' + this.pal[o.c].slice(0, 6);
+      ctx[o.mode + 'Text'](this.chars[o.char], tx, ty);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+}
+
 // Characters integers
 
 /**
 * @param {string} ch
 * @param {string} defaultValue
 *
-* @return {string}
+* @return {number}
 */
 function intOfChar(ch, defaultValue) {
   return ch === ' ' ? defaultValue : parseInt(ch, 36);
@@ -60,6 +105,7 @@ function modeValue(ch) {
 }
 
 function spriteStringifyOne(o, prev) {
+  console.warn('stringify', o);
   return [
     intToChar(o.char, prev.char),
     intToChar(o.x, prev.x),
@@ -88,16 +134,15 @@ function spriteStringify(ss) {
 function spriteParseOne(str, prev) {
   var result = {};
   result.char = intOfChar(str[0], prev.char);
-  result.x = intOfChar(str[1], prev.x || 0, 36);
-  result.y = intOfChar(str[2], prev.y || 0, 36);
-  result.c = intOfChar(str[3], prev.c || 0, 36);
-  result.sz = intOfChar(str[4], prev.sz || 18, 36);
-  result.r = intOfChar(str[5], prev.r || 0, 36);
-  result.sx = intOfChar(str[6], prev.sx || 1, 36);
-  result.sy = intOfChar(str[7], prev.sy || 1, 36);
-  result.mode = str[8]
-    ? str[8] === '-' ? 'stroke' : 'fill'
-    : prev.mode || 'fill';
+  result.x = intOfChar(str[1], prev.x || 0);
+  result.y = intOfChar(str[2], prev.y || 0);
+  result.c = intOfChar(str[3], prev.c || 0);
+  result.sz = intOfChar(str[4], prev.sz || 18);
+  result.r = intOfChar(str[5], prev.r || 0);
+  result.sx = intOfChar(str[6], prev.sx || 1);
+  result.sy = intOfChar(str[7], prev.sy || 1);
+  result.mode = intOfChar(str[8], prev.mode || 1);
+  result.paint = result.mode === 1 ? 'stroke' : 'fill';
   return result;
 }
 
@@ -112,42 +157,21 @@ function splitAt(str, length) {
 
 // parse all sprite strings into an array of objects
 function spriteParse(ss) {
-  if (!ss) return '';
-  if (!Array.isArray(ss)) ss = splitAt(ss, 9);
+  ss = splitAt(ss, 9);
   var res = [spriteParseOne(ss[0], {})];
   for (var i = 1; i < ss.length; i += 1) {
     res.push(spriteParseOne(ss[i], res[i - 1]));
   }
-  console.warn('spriteParse', ss, res);
   return res;
 }
-
-// Scale values in obj by divisor and set the values to ge between
-// [-17; 18].  For example if divisor is 3 each of the range of 35 steps would
-// be of value 35 / 3 ~= 11, i.e. [-5, 6]
-function scale(obj, divisor) {
-  var res = {};
-  res.char = obj.char;
-  res.c = obj.c;
-  res.sz = obj.sz;
-  res.r = obj.r;
-  res.mode = obj.mode;
-  res.x = (obj.x - 17) / divisor;
-  res.y = (obj.y - 17) / divisor;
-  res.sx = (obj.sx - 17) / divisor;
-  res.sy = (obj.sy - 17) / divisor;
-  return res;
-}
-
-// This is included in the client
 
 /**
- * @param ctx The 2d canvas context
- * @param ss  An Array of sprite objects
- * @param cs  An array of chars to be index
- * @param ps  Palette array of colors
- * @param x   x coordinate where to print the sprite
- * @param y   y coordinate to printthe sprite at
+ * @param {Element} ctx The 2d canvas context
+ * @param {Array<Object>} ss  An Array of sprite objects
+ * @param {Array<string>} cs  An array of chars to be index
+ * @param {Array<string>} ps  Palette array of colors
+ * @param {number} x   x coordinate where to print the sprite
+ * @param {number} y   y coordinate to printthe sprite at
  */
 function spritePaint(ctx, cs, ps, ss, x, y) {
   if (!Array.isArray(ss)) ss = spriteParse(ss);
@@ -180,8 +204,8 @@ function spritePaint(ctx, cs, ps, ss, x, y) {
     // XXX mode is fixed and borked
     // ctx[o.mode + 'Style'] = '#' + ps[o.c]
     // ctx[o.mode + 'Text'](cs[o.char], tx, ty)
-    ctx['fillStyle'] = '#' + ps[o.c].slice(0, 6);
-    ctx['fillText'](cs[o.char], tx, ty);
+    ctx[o.paint + 'Style'] = '#' + ps[o.c].slice(0, 6);
+    ctx[o.paint + 'Text'](cs[o.char], tx, ty);
     ctx.restore();
   }
   ctx.restore();
@@ -193,6 +217,7 @@ if (typeof module !== 'undefined') {
     stringify: spriteStringify,
     parse: spriteParse,
     paint: spritePaint,
+    Fut: Fut,
   };
 }
 // @end

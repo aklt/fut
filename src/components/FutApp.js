@@ -10,6 +10,7 @@ import TextArea from './TextArea';
 import Slider from './Slider';
 import Pal from './Pal';
 
+import {RadioGroup, Radio} from 'react-radio-group';
 import futSpriteMinify from '../sprite-minify';
 
 import './FutApp.css';
@@ -34,6 +35,10 @@ class FutApp extends Component {
     return value => {
       this.props.sliderChange(slider, value);
     };
+  };
+
+  paintModeChange = mode => {
+    this.props.sliderChange('mode', mode === 'fill' ? 0 : 1);
   };
 
   constructor(props) {
@@ -101,6 +106,18 @@ class FutApp extends Component {
               value={ch.r}
               onChange={this.sliderChange('r')}
             />
+            <RadioGroup
+              className="paintMode"
+              name="paintMode"
+              selectedValue={ch.mode & 1 ? 'stroke' : 'fill'}
+              onChange={this.paintModeChange}>
+              <label>
+                <Radio value="fill" />Fill
+              </label>
+              <label>
+                <Radio value="stroke" />Stroke
+              </label>
+            </RadioGroup>
           </div>
           <div className="mid">
             <Canvas chars={chars} width={200} height={200} />
