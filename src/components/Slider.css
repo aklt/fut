@@ -11,7 +11,7 @@
 .slider__rcslider {
   padding: 0;
   margin: 0;
-  left: 120px;
+  left: 100px;
   top: 2px;
   width: 70%;
 }
@@ -20,5 +20,5 @@
   position: relative;
   width: 8%;
   left: 60px;
-  bottom: 20px;
+  bottom: 16px;
 }

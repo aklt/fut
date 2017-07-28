@@ -116,12 +116,7 @@ class FutApp extends Component {
           />
         </div>
         <div className="foot">
-          <TextArea
-            className="fullwidth"
-            cols={200}
-            readonly
-            value={this.sprites}
-          />
+          <TextArea className="fullwidth" value={this.sprites} />
         </div>
       </section>
     );

@@ -22,6 +22,10 @@ class Slider extends Component {
     },
   };
 
+  changeNumber = (...value) => {
+    console.warn('Change number', value);
+  };
+
   render() {
     const props = Object.assign({}, this.props);
     const name = props.name;
@@ -33,7 +37,9 @@ class Slider extends Component {
           {name}
         </span>
         <RcSlider id={id} className="slider__rcslider" {...props} />
-        <input type="text" className="slider__value" value={props.value} />
+        <span className="slider__value">
+          {props.value}
+        </span>
       </div>
     );
   }
