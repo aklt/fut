@@ -120,17 +120,24 @@ class FutApp extends Component {
             </RadioGroup>
           </div>
           <div className="mid">
-            <Canvas chars={chars} width={200} height={200} />
+            <Canvas
+              chars={chars}
+              width={200}
+              height={200}
+              sliderChange={this.sliderChange}
+            />
             <Pal />
           </div>
-          <LayerStack
-            chars={this.props.futApp.chars}
-            activeIndex={this.props.futApp.activeIndex}
-            charClick={this.charClick}
-            charDrop={this.charDrop}
-            charAdd={this.props.charAdd}
-            charRemove={this.props.charRemove}
-          />
+          <div className="mid">
+            <LayerStack
+              chars={this.props.futApp.chars}
+              activeIndex={this.props.futApp.activeIndex}
+              charClick={this.charClick}
+              charDrop={this.charDrop}
+              charAdd={this.props.charAdd}
+              charRemove={this.props.charRemove}
+            />
+          </div>
         </div>
         <div className="foot">
           <TextArea className="fullwidth" value={this.sprites} />

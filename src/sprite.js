@@ -182,9 +182,8 @@ function spritePaint(ctx, cs, ps, ss, x, y) {
     var o = ss[i];
     var ox = o.x - 18;
     var oy = o.y - 18;
-    // Scale up to 4,5 the original size
-    var sx = (o.sx - 17) / 4;
-    var sy = (o.sy - 17) / 4;
+    var sx = o.sx - 17;
+    var sy = o.sy - 17;
     var tx = (ox + x) / sx;
     var ty = (oy + y) / sy;
     ctx.save();
@@ -205,6 +204,7 @@ function spritePaint(ctx, cs, ps, ss, x, y) {
     // ctx[o.mode + 'Style'] = '#' + ps[o.c]
     // ctx[o.mode + 'Text'](cs[o.char], tx, ty)
     ctx[o.paint + 'Style'] = '#' + ps[o.c].slice(0, 6);
+    ctx.globalAlpha = parseInt(ps[o.c].slice(6), 16) / 0xff;
     ctx[o.paint + 'Text'](cs[o.char], tx, ty);
     ctx.restore();
   }
