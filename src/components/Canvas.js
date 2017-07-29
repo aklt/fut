@@ -9,6 +9,7 @@ import './Canvas.css';
 class Canvas extends Component {
   static propTypes = {
     sliderChange: PropTypes.func.isRequired,
+    markChar: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -73,6 +74,7 @@ class Canvas extends Component {
   };
 
   render() {
+    console.warn('Canvas', this.props);
     return (
       <div className="canvas">
         <canvas
@@ -90,7 +92,7 @@ class Canvas extends Component {
   }
 
   paintSprite() {
-    const {chars, width, height} = this.props;
+    const {chars, activeIndex, width, height} = this.props;
     if (this.context2d) {
       var sz = this.canvasEl.width;
       var scale = sz / 36;
@@ -110,7 +112,7 @@ class Canvas extends Component {
         x,
         y,
       );
-      var f = new futSprite.Fut(resChars, resPal, resSprites);
+      //      var f = new futSprite.Fut(resChars, resPal, resSprites);
       ctx.restore();
     }
   }

@@ -205,6 +205,7 @@ function spritePaint(ctx, cs, ps, ss, x, y) {
     // ctx[o.mode + 'Text'](cs[o.char], tx, ty)
     ctx[o.paint + 'Style'] = '#' + ps[o.c].slice(0, 6);
     ctx.globalAlpha = parseInt(ps[o.c].slice(6), 16) / 0xff;
+    // if (i === 1) console.warn('SZ', ctx.g (cs[o.char]));
     ctx[o.paint + 'Text'](cs[o.char], tx, ty);
     ctx.restore();
   }

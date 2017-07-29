@@ -122,6 +122,7 @@ class FutApp extends Component {
           <div className="mid">
             <Canvas
               chars={chars}
+              activeIndex={activeIndex}
               width={200}
               height={200}
               sliderChange={this.sliderChange}
@@ -130,8 +131,8 @@ class FutApp extends Component {
           </div>
           <div className="mid">
             <LayerStack
-              chars={this.props.futApp.chars}
-              activeIndex={this.props.futApp.activeIndex}
+              chars={chars}
+              activeIndex={activeIndex}
               charClick={this.charClick}
               charDrop={this.charDrop}
               charAdd={this.props.charAdd}
