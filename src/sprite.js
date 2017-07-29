@@ -141,7 +141,7 @@ function spriteParseOne(str, prev) {
   result.r = intOfChar(str[5], prev.r || 0);
   result.sx = intOfChar(str[6], prev.sx || 1);
   result.sy = intOfChar(str[7], prev.sy || 1);
-  result.mode = intOfChar(str[8], prev.mode || 1);
+  result.mode = intOfChar(str[8], prev.mode || 0);
   result.paint = result.mode === 1 ? 'stroke' : 'fill';
   return result;
 }
