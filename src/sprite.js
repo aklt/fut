@@ -1,3 +1,4 @@
+//
 // Compile a sprite to and from an object
 //
 // Limitations:
