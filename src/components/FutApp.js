@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 // import entities from 'entities';
 
 import CharPicker from './CharPicker'
@@ -8,7 +7,6 @@ import Canvas from './Canvas'
 import LayerStack from './LayerStack'
 import TextArea from './TextArea'
 import Slider from './Slider'
-import Pal from './Pal'
 
 import { RadioGroup, Radio } from 'react-radio-group'
 import futSpriteMinify from '../sprite-minify'
@@ -132,7 +130,6 @@ class FutApp extends Component {
               sliderChange={this.sliderChange}
               markChar={this.markChar}
             />
-            <Pal />
           </div>
           <div className="mid">
             <LayerStack

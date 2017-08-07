@@ -1,44 +1,44 @@
 /* global fut */
-import PropTypes from 'prop-types';
-import React, { Component } from "react";
-import cn from 'classnames';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import StaticContainer from "react-static-container";
+import StaticContainer from 'react-static-container'
 
-import "./CharPicker.css";
+import './CharPicker.css'
 
 class CharPicker extends Component {
-  displayName: "CharPicker";
+  displayName: 'CharPicker'
 
   static propTypes = {
     onSelectChar: PropTypes.func
   }
 
   static defaultProps = {
-    onSelectChar: (ch) => {
-      console.warn('onSelectChar', ch);
+    onSelectChar: ch => {
+      console.warn('onSelectChar', ch)
     }
   }
   componentDidMount() {
-    const { onSelectChar } = this.props;
-    fut.charPicker(this.el, (selectedChar) => {
-      onSelectChar(selectedChar);
-    });
+    const { onSelectChar } = this.props
+    fut.charPicker(this.el, selectedChar => {
+      onSelectChar(selectedChar)
+    })
   }
   shouldComponentUpdate() {
-    return false;
+    return false
   }
   render() {
     return (
       <StaticContainer>
-        <div className="char-selector"
-          ref={(el) => {
-            this.el = el;
-          }}>
-        </div>
+        <div
+          className="char-selector"
+          ref={el => {
+            this.el = el
+          }}
+        />
       </StaticContainer>
-    );
+    )
   }
 }
 
-export default CharPicker;
+export default CharPicker

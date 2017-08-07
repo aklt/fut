@@ -1,7 +1,7 @@
+/* global Fut */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
-import futSprite from '../sprite'
+import '../Fut.js'
 import futSpriteMinify from '../sprite-minify'
 
 import './Canvas.css'
@@ -95,7 +95,7 @@ class Canvas extends Component {
   }
 
   paintSprite() {
-    const { chars, activeIndex, width, height } = this.props
+    const { chars, width, height } = this.props
     if (this.context2d) {
       var sz = this.canvasEl.width
       var scale = sz / 36
@@ -106,15 +106,10 @@ class Canvas extends Component {
       ctx.scale(scale, scale)
       ctx.clearRect(0, 0, width, height)
       var res = futSpriteMinify(chars)
-      var [resChars, resPal, resSprites] = res.split(/\t/)
-      futSprite.paint(
-        this.context2d,
-        resChars,
-        resPal.split(/\|/),
-        futSprite.parse(resSprites),
-        x,
-        y
-      )
+      // var [resChars, resPal, resSprites] = res.split(/~/)
+      console.warn('fs', Fut, res)
+      var f0 = new Fut(res)
+      f0.paint(this.context2d, x, y)
       //      var f = new futSprite.Fut(resChars, resPal, resSprites);
       ctx.restore()
     }
