@@ -1,1 +1,0 @@
-../fut-sprite/sprite-minify.js
